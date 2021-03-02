@@ -1,0 +1,21 @@
+PARTY/stu/exam.php
+
+第264行 
+
+var isMem = document.getElementById("isMemoryTemp").value;
+------------------------
+第275行
+
+isMem:isMem,
+------------------------
+第896~904行
+
+<textarea name="isMemoryTemp" id="isMemoryTemp" style="display:none">
+                      <?php
+                        $sqlT = "select * from QuestionTags where QID='$_GET[QID]'";
+                        $resultT =  $conn1->query($sqlT);
+                        $rowT = $resultT->fetch_assoc();
+                        $mem = $rowT[mem_adr];
+                        echo "$mem";
+                      ?>
+</textarea>

@@ -1,0 +1,36 @@
+PARTY/stu/修改 Endexam.php
+
+第4行
+require("../se/php/verifyMem.php");
+-------------------------------
+第9行 
+
+$isMemory = 0;
+------------------------
+97行~105行
+
+$sql = "SELECT mem_adr FROM QuestionTags WHERE QID=".$temp[$j];
+      $result = $conn1->query($sql);
+      $mem = $result->fetch_assoc();
+      $isMemory = $mem[mem_adr];
+      if($isMemory == 1){
+        $output = shell_exec("sudo cc /var/www/html/temp/".$_SESSION[user]."/exam/".$_GET[EID]."/".$temp[$j]."/mem_code.c -lm 2>&1 1> /dev/null -o mem.out");
+      }else{
+        $output = shell_exec("sudo cc /var/www/html/temp/".$_SESSION[user]."/exam/".$_GET[EID]."/".$temp[$j]."/code.c -lm 2>&1 1> /dev/null");
+      }
+-------------------------
+114行~118行
+
+if($isMemory == 1 && strcmp($proLan,"C")==0){
+          shell_exec($codepath."timeout 3s ./mem.out < /var/www/html/exampaper/".$_GET[PID]."/".$temp[$j]."/input".($i+1).".txt > mem_output.txt");
+        }else{
+          shell_exec($codepath."timeout 3s ./a.out < /var/www/html/exampaper/".$_GET[PID]."/".$temp[$j]."/input".($i+1).".txt > output.txt");//java -Dfile.encoding=UTF-8
+        }
+------------------------
+124行~128行
+
+if($isMemory == 1 && strcmp($proLan,"C")==0){
+          $output = shell_exec($codepath.'sudo diff mem_output.txt /var/www/html/exampaper/'.$_GET[PID].'/'.$temp[$j].'/output'.($i+1).'.txt');
+        }else{
+          $output = shell_exec($codepath.'sudo diff output.txt /var/www/html/exampaper/'.$_GET[PID].'/'.$temp[$j].'/output'.($i+1).'.txt');
+        }

@@ -1,0 +1,36 @@
+PARTY/tea/question.php
+
+第605行
+var testFileContent = testFileTemp.substring(divStart,divEnd+6);
+
+--------------------
+
+第476行
+isMemory: document.getElementById('isMemory').value,
+
+--------------------
+第620~633行
+
+$sql = "SELECT * from QuestionTags where QID='$_GET[ID]'";
+$result = $conn1->query($sql);
+if($result ->num_rows>0){
+  $row = $result -> fetch_assoc();
+  if (strcmp($row[mem_adr], "1") == 0) {
+      echo "
+                  document.getElementById('isMemory').selectedIndex='1';
+                ";
+  } else {
+      echo "
+                  document.getElementById('isMemory').selectedIndex='0';
+                ";
+  }
+}
+----------------------------
+第840~845行
+
+<li>
+	<select name="isMemory" id="isMemory">
+	<option value="0">否</option>
+	<option value="1">是</option>
+	</select>  
+</li>

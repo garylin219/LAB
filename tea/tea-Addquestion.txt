@@ -1,0 +1,5 @@
+PARTY/tea/Addquestion.php
+
+第51~52行
+$sql = "INSERT INTO `QuestionTags`(`ID`, `QID`, `mem_adr`) VALUES (NULL,'$data[QID]','$_POST[isMemory]')";
+$conn1->query($sql);

@@ -1,0 +1,39 @@
+/se/新增c_head資料夾
+/c_head 裡面新增 verifyMem.h
+
+*驗證記憶體題目用的標頭檔
+--------------------------------
+se/php/新增 verifyMem.php
+
+*verifyMem.php是用於記憶體題目把使用者的程式碼轉成驗證記憶體位址用的php
+
+--------------------------------
+
+se/php/修改 executionTestFile.php
+
+第3行
+require("verifyMem.php");
+------------------------
+25行~33行
+
+if($isMemory == 1){
+          shell_exec('sudo cp ../c_head/verifyMem.h '.$path);
+          shell_exec("sudo chown -R apache:apache ".$path); 
+          $codeTemp = file_get_contents($path."/code.c");
+          $code_file = fopen($path."/code.c","w");
+          $codeTemp = putVerifyContent($codeTemp);//func putVerifyContent by verifyMem.php
+          fwrite($code_file,$codeTemp);
+          fclose($code_file);
+}
+------------------------
+50行~57行
+
+if($isMemory == 1){
+              
+              $codeTemp = file_get_contents($path."/code.c");
+              $code_file = fopen($path."/code.c","w");
+              $codeTemp = removeVerifyContent($codeTemp);//func removeVerifyContent by verifyMem.php
+              fwrite($code_file,$codeTemp);
+              fclose($code_file);
+}
+--------------------------------------------

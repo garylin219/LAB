@@ -1,0 +1,6 @@
+PARTY/tea/Rmquestion.php
+
+第33~34行
+
+$sql = "DELETE FROM `QuestionTags` WHERE `QID`='$a[$i]'";
+$conn1->query($sql);

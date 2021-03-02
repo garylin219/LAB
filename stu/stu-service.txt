@@ -1,0 +1,60 @@
+PARTY/stu/service.php
+
+第5行
+
+require("../se/php/verifyMem.php");
+----------
+第23~26行
+
+if($isMem == 1 && strcmp($proLan,"C")==0){
+            shell_exec('sudo cp ../se/c_head/verifyMem.h ../temp/'.$_SESSION[user].'/exam/'.$EID.'/'.$QID);
+
+          }
+----------
+第30~45行
+
+$codetemp=str_replace("<斜線>","/",$codetemp);
+$codetemp=str_replace("\\\\","\\",$codetemp);
+$codetemp=str_replace("''","'",$codetemp); 
+if(strcmp($proLan,"CPP")==0){
+$file = fopen("../temp/".$_SESSION[user]."/exam/".$EID."/".$QID."/code.cpp","w");
+}
+else
+{
+$file = fopen("../temp/".$_SESSION[user]."/exam/".$EID."/".$QID."/code.c","w");
+  if($isMem == 1 && strcmp($proLan,"C")==0){
+    $mem_file = fopen("../temp/".$_SESSION[user]."/exam/".$EID."/".$QID."/mem_code.c","w");
+    $mem_codetemp = putVerifyContent($codetemp);
+    fwrite($mem_file,$mem_codetemp);
+    fclose($mem_file);
+  }
+}
+-------------
+第103~112行
+
+if(strcmp($proLan,"C")== 0 && $isMem == 1){
+	//identify memPaper
+	$mem_output = shell_exec($codepath.'sudo cc mem_code.c -lm 2>&1 1> /dev/null -o mem.out');
+	if(empty($mem_output)){
+		$mem_outputRun=shell_exec($codepath."timeout 3s ./mem.out < input.txt 2>&1 1> /dev/null");
+	}
+	if(empty($mem_output)){
+		shell_exec($codepath."timeout 3s ./mem.out < input.txt > mem_output.txt");//java -Dfile.encoding=UTF-8
+	}
+}
+
+----------------
+第150~154行
+
+if(strcmp($proLan,"C")== 0 && $isMem == 1){
+	$output = shell_exec($codepath.'sudo diff mem_output.txt correctoutput.txt');
+}else{
+	$output = shell_exec($codepath.'sudo diff output.txt correctoutput.txt');
+}
+
+-----------------------------
+
+
+
+
+ 

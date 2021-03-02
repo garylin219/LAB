@@ -1,0 +1,7 @@
+PARTY/tea/Upquestion.php
+
+第69~70行
+
+$sql = "UPDATE `QuestionTags` SET `mem_adr`='$_POST[isMemory]' where `QID`='$_POST[ID]'";
+$conn1->query($sql);
+
